@@ -1,5 +1,6 @@
 import os
 from flask import Flask, abort, request, jsonify
+from flask_cors import CORS
 
 from lib.IO import printRed, printYellow, printGreen
 from lib import IO, cloud
@@ -7,6 +8,7 @@ from sample import brain
 
 path = '/Users/nils/Documents/jobb/amedia/recomigo/data/'
 app = Flask(__name__)
+CORS(app)
 
 def createFilename(publications):
     publicationList = publications.split(',') if ',' in publications else [publications]
@@ -44,7 +46,7 @@ def run(userKey=None):
 
 @app.route('/')
 def main():
-    return 'OK'
+    return jsonify('OK')
 
 
 if __name__ == '__main__':
